@@ -91,14 +91,8 @@ var ContentOnlyTag = (function(_super) {
       function ContentOnlyTag() {
           ContentOnlyTag.__super__.constructor.apply(this, arguments);
       }
-      ContentOnlyTag.prototype._toHTML = function() { 
-          const toReturn = {
-              name: this.name,
-              content: this.getContent(),
-              params: this.params
-          }        
-          // return this.getContent();
-          return `[attachment]${JSON.stringify(toReturn)}[/attachment]`;
+      ContentOnlyTag.prototype._toHTML = function() {    
+          return this.getContent();
         };
       return ContentOnlyTag;
   })(bbcode.Tag),
