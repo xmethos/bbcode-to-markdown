@@ -91,9 +91,9 @@ var ContentOnlyTag = (function(_super) {
       function ContentOnlyTag() {
           ContentOnlyTag.__super__.constructor.apply(this, arguments);
       }
-      ContentOnlyTag.prototype._toHTML = function() {
+      ContentOnlyTag.prototype._toHTML = function() {    
           return this.getContent();
-      };
+        };
       return ContentOnlyTag;
   })(bbcode.Tag),
 
@@ -229,6 +229,10 @@ var ContentOnlyTag = (function(_super) {
       return ImageTag;
   })(bbcode.BUILTIN.img);
 
+  // ----------------------------------------------------------------------------------------------
+
+
+
 var newTags = [];
 
 var pushTag = function(name, klass) {
@@ -265,4 +269,4 @@ pushTags(quoteTags, QuoteTag);
 pushTags(maybeSelfAttrTags, MaybeSelfAttrTag);
 pushTags(maybeSelfAttrAnchorTags, MaybeSelfAttrAnchorTag);
 
-module.exports = newTags;
+module.exports = {newTags, pushTags};

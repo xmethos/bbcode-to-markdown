@@ -8,7 +8,9 @@ var Entities = require('html-entities').AllHtmlEntities;
 var entities = new Entities();
 
 var bbcodejs = require('bbcodejs');
-var newBBCodeTags = require('./newBBCodeTags');
+var newBBCodeTags = require('./newBBCodeTags').newTags;
+var pushTags = require('./newBBCodeTags').pushTags;
+
 var parser = new bbcodejs.Parser();
 
 newBBCodeTags.forEach(function(tag, i) {
@@ -70,6 +72,11 @@ var newToMarkdownOptions = require('./newToMarkdownOptions');
         return convertHtmlToMarkdown(convertBbcodeToHml(str), options);
     };
 
+    var registerTags = function(names, sameKlass){
+        pushTags(names, sameKlass);
+        parser.registerTag(names, sameKlass);        
+    }
+
     // backward compatible
     var convert = convertBbcodeToMarkdown;
 
@@ -77,6 +84,8 @@ var newToMarkdownOptions = require('./newToMarkdownOptions');
     convert.bbcodeToHTML = convertBbcodeToHml;
     convert.bbcodeToMarkdown = convertBbcodeToMarkdown;
     convert.convertHtmlToMarkdown = convertHtmlToMarkdown;
+
+    convert.registerTags = registerTags;
 
     convert.htmlToMarkdown = toMarkdown;
     convert.decodeEntities = entities.decode.bind(entities);
